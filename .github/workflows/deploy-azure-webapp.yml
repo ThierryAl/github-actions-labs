@@ -39,19 +39,19 @@ jobs:
     - name: Terraform Init
       id: init
       run: terraform init
-      working-directory: ./terraform
+      working-directory: ./
 
     # Étape 5: Terraform Format
     - name: Terraform Format
       id: fmt
       run: terraform fmt -check
-      working-directory: ./terraform
+      working-directory: ./
 
     # Étape 6: Terraform Validate
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
-      working-directory: ./terraform
+      working-directory: ./
 
     # Étape 7: Terraform Plan
     - name: Terraform Plan
@@ -62,20 +62,20 @@ jobs:
           -var="project_name=monapp" \
           -var="environment=dev" \
           -out=tfplan
-      working-directory: ./terraform
+      working-directory: ./
 
     # Étape 8: Terraform Apply (seulement sur main et déclenchement manuel)
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
       id: apply
       run: terraform apply -auto-approve tfplan
-      working-directory: ./terraform
+      working-directory: ./
 
     # Étape 9: Output des résultats
     - name: Terraform Outputs
       if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
       run: terraform output
-      working-directory: ./terraform
+      working-directory: ./
 
   # Job de vérification
   verify:
