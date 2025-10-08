@@ -1,7 +1,7 @@
 # providers.tf - Version avec authentification interactive
 terraform {
   required_version = ">= 1.0"
-  
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -17,7 +17,7 @@ terraform {
 # Provider Azure avec authentification automatique
 provider "azurerm" {
   features {}
-  
+
   # Terraform utilisera automatiquement la session az login
   # Aucune configuration d'authentification nécessaire
 }
